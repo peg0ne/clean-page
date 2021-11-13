@@ -1,0 +1,158 @@
+body {
+    padding-top: 5vh;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    padding-bottom: 5vh;
+    background-color: var(--color0);
+    overflow: hidden;
+}
+
+.viewport {
+    height: 90vh;
+    width: 90vw;
+    display: flex;
+}
+
+.img {
+    border-radius: 5px;
+    display: flex;
+    width: 48%;
+    overflow-y: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(https://preview.redd.it/qx4nbscle7v71.jpg?width=960&crop=smart&auto=webp&s=b62f9d65c84ebacdf70c345a622ce32a1b26d44d);
+}
+
+.workspace {
+    padding-left: 4%;
+    width: 48%;
+}
+
+.searchbar {
+    display: flex;
+    width: 100%;
+    height: 100px;
+}
+
+.searchpointer {
+    width: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.searchinput {
+    width: 95%;
+}
+
+.links {
+    display: inline-grid;
+    width: 100%;
+}
+
+.link {
+    width: 100%;
+}
+
+a,
+h1,
+.searchinput {
+    font-family: monospace;
+    text-decoration: none;
+    color: var(--color2);
+}
+
+@keyframes search-anim {
+    from {
+        width: 20%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.searchinput {
+    width: 100%;
+    height: 30px;
+    margin-top: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    border-bottom-color: var(--color2);
+}
+
+.searchinput:focus-visible {
+    outline-width: 0px;
+    outline-style: none;
+    border-bottom-color: var(--color5);
+    animation: search-anim 0.5s;
+}
+
+@keyframes a-selection-animations {
+    from {
+        margin-left: 0vw;
+    }
+
+    to {
+        margin-left: 1vw;
+    }
+}
+
+a:selection {
+    background-color: var(--color4);
+    color: var(--color0);
+    padding-right: 10px;
+    margin-left: 1vw;
+    outline: none;
+    animation-name: a-selection-animations;
+    animation-duration: 0.3s;
+}
+
+a:hover {
+    background-color: var(--color4);
+    color: var(--color0);
+    padding-right: 10px;
+    margin-left: 1vw;
+    outline: none;
+    animation-name: a-selection-animations;
+    animation-duration: 0.3s;
+}
+
+a:focus {
+    background-color: var(--color4);
+    color: var(--color0);
+    padding-right: 10px;
+    margin-left: 1vw;
+    outline: none;
+    animation-name: a-selection-animations;
+    animation-duration: 0.3s;
+}
+
+.username {
+    margin-top: 70vh;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    min-width: 30%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: xxx-large;
+    background-color: rgba(0, 0, 0, 1);
+    border-radius: 5px;
+}
+
+@media (orientation: portrait) {
+    h1,
+    a {
+        font-size: x-large;
+    }
+}
+
+@media (orientation: landscape) {
+    h1,
+    a {
+        font-size: x-large;
+    }
+}
