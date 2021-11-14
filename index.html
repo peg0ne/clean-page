@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xml:lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, user-scalable=no"
-        />
-        <title>Clean Page</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-    </head>
-    <body>
-        <div class="viewport">
-            <div class="img">
-                <h1 class="username">Peg0ne</h1>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Clean Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <div id="entryCreator" class="entrycreator" style="display: none;">
+        <div>
+            <h3>name</h3>
+            <input id="nameInput" class="searchinput" type="text">
+        </div>
+        <div>
+            <h3>url</h3>
+            <input id="urlInput" class="searchinput" type="text">
+        </div>
+        <div>
+            <button onclick="showCreator(false)" class="link"><span style="color:#ff6265">X</span></button>
+            <button class="link"><span style="color:#bbff62">+</span></button>
+        </div>
+    </div>
+    <div class="viewport">
+        <div class="img">
+            <h1 class="username">Peg0ne</h1>
+        </div>
+        <div class="workspace">
+            <div class="searchbar">
+                <h1 class="searchpointer">></h1>
+                <input id="searchinputbar" type="text" class="searchinput" />
             </div>
-            <div class="workspace">
-                <div class="searchbar">
-                    <h1 class="searchpointer">></h1>
-                    <input type="text" class="searchinput" />
-                </div>
-                <div class="links">
-                    <a
-                        class="link"
-                        href="https://www.reddit.com/r/neonmoe/comments/qe570n/medusa_morry/"
-                        >somename</a
-                    >
-                    <a
-                        class="link"
-                        href="https://www.reddit.com/r/neonmoe/comments/qe570n/medusa_morry/"
-                        >somename</a
-                    >
-                    <a
-                        class="link"
-                        href="https://www.reddit.com/r/neonmoe/comments/qe570n/medusa_morry/"
-                        >somename</a
-                    >
-                </div>
+            <div id="entryHolder" class="links">
+                <button class="link" onclick="showCreator()">+</button>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+<script src="main.js"></script>
+
 </html>

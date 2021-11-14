@@ -1,3 +1,14 @@
+:root {
+    --color0: #2E2B30;
+    --color1: #4F1422;
+    --color2: #FAD64A;
+    --color3: #79539C;
+    --color4: #DD7110;
+    --color5: #823881;
+    --color6: #751C2A;
+    --color7: #BCCCCD;
+}
+
 body {
     padding-top: 5vh;
     padding-right: 5vw;
@@ -55,6 +66,7 @@ body {
 
 a,
 h1,
+h3,
 .searchinput {
     font-family: monospace;
     text-decoration: none;
@@ -65,7 +77,6 @@ h1,
     from {
         width: 20%;
     }
-
     to {
         width: 100%;
     }
@@ -91,7 +102,6 @@ h1,
     from {
         margin-left: 0vw;
     }
-
     to {
         margin-left: 1vw;
     }
@@ -155,4 +165,44 @@ a:focus {
     a {
         font-size: x-large;
     }
+}
+
+button {
+    background-color: var(--color0);
+    border: solid 3px var(--color2);
+    color: var(--color2);
+    font-family: monospace;
+    font-weight: 800;
+    font-size: x-large;
+    border-radius: 200px;
+    max-width: 30px;
+    max-height: 30px;
+    margin-top: 30px;
+}
+
+button:focus,
+button:hover {
+    border: solid 3px var(--color4);
+    color: var(--color4);
+}
+
+.entrycreator {
+    display: inline-grid;
+    grid-template-columns: 100%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 0;
+    bottom: 0;
+    padding: 50px;
+    text-align: center;
+    height: 400px;
+    width: 400px;
+    background-color: var(--color0);
+    border-radius: 9px;
+    border: solid 3px var(--color2);
 }
