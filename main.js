@@ -67,7 +67,7 @@ function drawDataEntries() {
             if (e.key == 'Delete') {
                 e.preventDefault();
                 for (var i = 0; i < dataEntries.length; i++) {
-                    if (dataEntries[i].name == e.target.innerText) {
+                    if (dataEntries[i].name == e.target.innerText || dataEntries[i].name == e.target.innerHTML) {
                         dataEntries.splice(i, 1);
                         localStorage.setItem('clean-page-links', JSON.stringify(dataEntries));
                     }
@@ -88,8 +88,6 @@ function showCreator(isActive = true) {
 function addEntry() {
     var entryName = entryNameInput.value;
     var entryUrl = entryUrlInput.value;
-    entryNameInput.value = '';
-    entryUrlInput.value = '';
     if (entryName == '' || entryUrl == "") {
         alert('Entry name cannot be empty');
         return;
@@ -98,6 +96,8 @@ function addEntry() {
         alert('Entry url has to be valid');
         return;
     }
+    entryNameInput.value = '';
+    entryUrlInput.value = '';
     for (var i = 0; i < dataEntries.length; i++) {
         if (dataEntries[i].name == entryName || dataEntries[i].url == entryUrl) {
             alert('Entry already exists');
