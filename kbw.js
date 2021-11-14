@@ -3,9 +3,11 @@ var MARKERID = "kbwmarker-666-69-420";
 var isOpen = false;
 var current = "";
 var alphabet = [
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'
+    'a', 'b', 'c', 'd', 'e', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'
 ];
 var inputEl = document.getElementById("searchinputbar");
+var entryNameInput = document.getElementById("nameInput");
+var entryUrlInput = document.getElementById("urlInput");
 
 document.onkeydown = function(e) {
     if (e.key == 'Escape') {
@@ -15,7 +17,10 @@ document.onkeydown = function(e) {
         toggleOpen();
     } else if (e.key == 'Tab') {
         return;
-    } else if (e.key == 's' && entryCreator.style.display == 'none' && document.activeElement != inputEl) {
+    } else if (e.key == 's' && entryCreator.style.display == 'none' &&
+        document.activeElement != inputEl &&
+        document.activeElement != entryNameInput &&
+        document.activeElement != entryUrlInput) {
         e.preventDefault();
         inputEl.focus();
     } else if (e.key == "f") {
