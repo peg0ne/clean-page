@@ -38,6 +38,9 @@ function search_duck(val) {
         var imgUrl = searchValue.replace("setimg ", '');
         userImage.style.backgroundImage = `url(${imgUrl})`;
         localStorage.setItem('clean-page-img', imgUrl);
+    } else if (searchValue.startsWith("-r")) {
+        searchValue = searchValue.replace("-r ", "");
+        window.open("https://reddit.com/r/" + searchValue, "_Blank");
     } else if (searchValue.startsWith("-e7")) {
         searchValue = searchValue.replace("-e7 ", "");
         window.open("https://epic7x.com/character/" + searchValue, "_Blank");
