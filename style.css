@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --color0: #2E2B30;
     --color1: #4F1422;
     --color2: #FAD64A;
@@ -7,6 +7,17 @@
     --color5: #823881;
     --color6: #751C2A;
     --color7: #BCCCCD;
+} */
+
+:root {
+    --color0: #2E2B30;
+    --color1: #635c68;
+    --color2: #908697;
+    --color3: #b7aac0;
+    --color4: #d6c6e0;
+    --color5: #e3d5ec;
+    --color6: #e4d1f0;
+    --color7: #f7ebff;
 }
 
 body {
@@ -71,6 +82,7 @@ h3,
     font-family: monospace;
     text-decoration: none;
     color: var(--color2);
+    font-weight: 800;
 }
 
 @keyframes search-anim {
@@ -94,7 +106,7 @@ h3,
 .searchinput:focus-visible {
     outline-width: 0px;
     outline-style: none;
-    border-bottom-color: var(--color5);
+    border-bottom-color: var(--color4);
     animation: search-anim 0.5s;
 }
 
@@ -107,34 +119,39 @@ h3,
     }
 }
 
+a:hover::before,
+a:focus::before {
+    content: '$ ';
+}
+
 a:selection {
-    background-color: var(--color4);
-    color: var(--color0);
+    /* background-color: var(--color4);
     padding-right: 10px;
-    margin-left: 1vw;
+    margin-left: 1vw; */
+    color: var(--color4);
     outline: none;
-    animation-name: a-selection-animations;
-    animation-duration: 0.3s;
+    /* animation-name: a-selection-animations;
+    animation-duration: 0.3s; */
 }
 
 a:hover {
-    background-color: var(--color4);
-    color: var(--color0);
+    /* background-color: var(--color4);
     padding-right: 10px;
-    margin-left: 1vw;
+    margin-left: 1vw; */
+    color: var(--color4);
     outline: none;
-    animation-name: a-selection-animations;
-    animation-duration: 0.3s;
+    /* animation-name: a-selection-animations;
+    animation-duration: 0.3s; */
 }
 
 a:focus {
-    background-color: var(--color4);
-    color: var(--color0);
+    /* background-color: var(--color4);
     padding-right: 10px;
-    margin-left: 1vw;
+    margin-left: 1vw; */
+    color: var(--color4);
     outline: none;
-    animation-name: a-selection-animations;
-    animation-duration: 0.3s;
+    /* animation-name: a-selection-animations;
+    animation-duration: 0.3s; */
 }
 
 .username {
@@ -205,4 +222,12 @@ button:hover {
     background-color: var(--color0);
     border-radius: 9px;
     border: solid 3px var(--color2);
+}
+
+.kbw {
+    position: absolute;
+}
+
+.kbw::before {
+    content: ':';
 }
