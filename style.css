@@ -38,7 +38,7 @@ body {
 .img {
     border-radius: 5px;
     display: flex;
-    width: 48%;
+    width: 38%;
     overflow-y: hidden;
     background-size: cover;
     background-repeat: no-repeat;
@@ -47,7 +47,7 @@ body {
 
 .workspace {
     padding-left: 4%;
-    width: 48%;
+    width: 58%;
 }
 
 .searchbar {
