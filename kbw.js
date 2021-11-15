@@ -1,4 +1,4 @@
-var MARKERTAG = "kbwmarker";
+var MARKERTAG = "p";
 var MARKERID = "kbwmarker-666-69-420";
 var isOpen = false;
 var current = "";
@@ -97,7 +97,9 @@ function addToCurrent(v) {
         current = newcurrent;
         document.getElementById('kbw').innerText = current;
     }
-    if (current.length > 1 && v == 'Enter') {
+    if (v.length > 1) return;
+    current += v;
+    if (current.length > 1) {
         try {
             parent = getMarkerParent();
             removeMarkers();
@@ -108,7 +110,13 @@ function addToCurrent(v) {
             return;
         }
     }
-    if (v.length > 1) return;
-    current += v;
+    var markers = document.getElementsByTagName(MARKERTAG);
+    for (var i = 0; i < markers.length; i++) {
+        var text = markers[i].innerText;
+        if (text.includes(current)) {
+            text = text.replace(current, `<span style="color:yellow">${current}</span>`);
+            markers[i].innerHTML = text;
+        }
+    }
     document.getElementById('kbw').innerText = current;
 }
