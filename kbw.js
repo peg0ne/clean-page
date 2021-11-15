@@ -23,7 +23,10 @@ document.onkeydown = function(e) {
         document.activeElement != entryUrlInput) {
         e.preventDefault();
         inputEl.focus();
-    } else if (e.key == "f") {
+    } else if (e.key == "f" && entryCreator.style.display == 'none' &&
+        document.activeElement != inputEl &&
+        document.activeElement != entryNameInput &&
+        document.activeElement != entryUrlInput) {
         if (isOpen) {
             removeMarkers();
         } else {
@@ -76,6 +79,10 @@ function createMarker(l, startIndex, letter) {
         marker.innerText = `${letter}${alphabet[i + startIndex]}`;
         marker.id = MARKERID;
         l[i].appendChild(marker);
+        posY = l[i].getBoundingClientRect().top + document.documentElement.scrollTop;
+        posX = l[i].getBoundingClientRect().left + document.documentElement.scrollLeft;
+        marker.style.top = posY + 'px';
+        marker.style.left = (posX - 40) + 'px';
     }
 }
 
