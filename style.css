@@ -69,6 +69,9 @@ body {
         width: 100%;
         font-size: xx-large!important;
     }
+    .links {
+        padding-bottom: 40px;
+    }
 }
 
 @media (orientation: landscape) {
@@ -80,6 +83,7 @@ body {
     .workspace {
         padding-left: 4%;
         width: 58%;
+        max-height: 90vh;
     }
     .img {
         border-radius: 5px;
