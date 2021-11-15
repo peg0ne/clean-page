@@ -240,4 +240,27 @@ button:hover {
     padding: 5px;
     border-radius: 6px;
     position: absolute;
+    font-size: x-large;
+    font-family: monospace;
+    font-weight: 800;
+}
+
+#config {
+    position: absolute;
+    resize: none;
+    height: 90vh;
+    width: 90vw;
+    padding: 0;
+    margin: 0;
+    color: var(--color7);
+    background-color: var(--color0);
+    outline: none;
+    border: none;
+    font-family: monospace;
+    font-size: xx-large;
+}
+
+#config:focus-visible {
+    outline: none;
+    border: none;
 }

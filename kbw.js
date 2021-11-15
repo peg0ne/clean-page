@@ -8,6 +8,7 @@ var alphabet = [
 var inputEl = document.getElementById("searchinputbar");
 var entryNameInput = document.getElementById("nameInput");
 var entryUrlInput = document.getElementById("urlInput");
+var configInput = document.getElementById("config");
 
 document.onkeydown = function(e) {
     if (e.key == 'Escape') {
@@ -15,18 +16,28 @@ document.onkeydown = function(e) {
         removeMarkers();
         isOpen = true;
         toggleOpen();
+        showConfig(false);
     } else if (e.key == 'Tab') {
         return;
-    } else if (e.key == 's' && entryCreator.style.display == 'none' &&
+    } else if (e.key == 'c' && !isOpen && entryCreator.style.display == 'none' &&
         document.activeElement != inputEl &&
         document.activeElement != entryNameInput &&
-        document.activeElement != entryUrlInput) {
+        document.activeElement != entryUrlInput &&
+        configInput.style.display == 'none') {
+        e.preventDefault();
+        showConfig(true);
+    } else if (e.key == 's' && !isOpen && entryCreator.style.display == 'none' &&
+        document.activeElement != inputEl &&
+        document.activeElement != entryNameInput &&
+        document.activeElement != entryUrlInput &&
+        configInput.style.display == 'none') {
         e.preventDefault();
         inputEl.focus();
     } else if (e.key == "f" && entryCreator.style.display == 'none' &&
         document.activeElement != inputEl &&
         document.activeElement != entryNameInput &&
-        document.activeElement != entryUrlInput) {
+        document.activeElement != entryUrlInput &&
+        configInput.style.display == 'none') {
         if (isOpen) {
             removeMarkers();
         } else {
@@ -43,8 +54,7 @@ function getMarkerParent() {
     var markers = document.getElementsByTagName(MARKERTAG);
     for (var i = 0; i < markers.length; i++) {
         if (markers[i].innerText == current) {
-            console.log(markers[i].parentElement);
-            return markers[i].parentElement;
+            return markers[i].nextSibling;
         }
     }
 }
@@ -78,10 +88,10 @@ function createMarker(l, startIndex, letter) {
         marker.style.color = "var(--color0)";
         marker.innerText = `${letter}${alphabet[i + startIndex]}`;
         marker.id = MARKERID;
-        l[i].appendChild(marker);
+        l[i].parentElement.insertBefore(marker, l[i]);
         posY = l[i].getBoundingClientRect().top + document.documentElement.scrollTop;
         posX = l[i].getBoundingClientRect().left + document.documentElement.scrollLeft;
-        marker.style.top = posY + 'px';
+        marker.style.top = (posY - 30) + 'px';
         marker.style.left = (posX - 40) + 'px';
     }
 }
@@ -91,11 +101,22 @@ function toggleOpen() {
 }
 
 function addToCurrent(v) {
+    var markers = document.getElementsByTagName(MARKERTAG);
     if (!v) return;
     if (v == 'Backspace') {
         var newcurrent = current.slice(0, -1);
         current = newcurrent;
         document.getElementById('kbw').innerText = current;
+        for (var i = 0; i < markers.length; i++) {
+            var text = markers[i].innerText;
+            if (text.includes(current)) {
+                text = text.replace(current, `<span style="color:yellow">${current}</span>`);
+                markers[i].innerHTML = text;
+            } else {
+                text = text.replace('<span style="color:yellow">', '').replace('</span>', '');
+                markers[i].innerHTML = text;
+            }
+        }
     }
     if (v.length > 1) return;
     current += v;
@@ -105,16 +126,24 @@ function addToCurrent(v) {
             removeMarkers();
             toggleOpen();
             current = '';
-            parent.click();
-        } catch {
+            if (parent.tagName == 'INPUT') {
+                console.log('focus');
+                parent.focus();
+            } else {
+                parent.click();
+            }
+        } catch (e) {
+            console.log(e);
             return;
         }
     }
-    var markers = document.getElementsByTagName(MARKERTAG);
     for (var i = 0; i < markers.length; i++) {
         var text = markers[i].innerText;
         if (text.includes(current)) {
             text = text.replace(current, `<span style="color:yellow">${current}</span>`);
+            markers[i].innerHTML = text;
+        } else {
+            text = text.replace('<span style="color:yellow">', '').replace('</span>', '');
             markers[i].innerHTML = text;
         }
     }

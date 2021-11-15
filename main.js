@@ -15,6 +15,7 @@ var entryHolder = document.getElementById("entryHolder");
 var inputEl = document.getElementById("searchinputbar");
 var usernameText = document.getElementById("usernameText");
 var userImage = document.getElementById("userImg");
+var configInput = document.getElementById("config");
 
 search_duck(`setimg ${bgImgUrl}`);
 search_duck(`setname ${usernameValue}`);
@@ -82,6 +83,43 @@ function showCreator(isActive = true) {
     entryCreator.style.display = entryCreator.style.display == 'none' && isActive ? 'inline-grid' : 'none';
     if (entryCreator.style.display != 'none') {
         entryNameInput.focus();
+    }
+}
+
+function showConfig(isActive = true) {
+    var wasActive = configInput.style.display != 'none';
+    configInput.style.display = configInput.style.display == 'none' && isActive ? 'block' : 'none';
+    if (configInput.style.display != 'none') {
+        configInput.focus();
+    }
+    if (isActive) {
+        configInput.value = `CONFIG:\nname=${usernameValue}\nimg=${bgImgUrl}\n\nENTRIES:\n${dataEntries.map(e => `\nentryName=${e['name']}\nentryUrl=${e['url']}`).join('\n')}`
+    } else if (wasActive) {
+        var split = configInput.value.split('\n');
+        let nameValue;
+        let imgValue;
+        let cName;
+        var newEntries = [];
+        split.forEach(line => {
+            if (line.startsWith('name=')) nameValue = line.replace('name=', '');
+            else if (line.startsWith('img=')) imgValue = line.replace('img=', '');
+            else if (line.startsWith('entryName=')) cName = line.replace('entryName=','');
+            else if (line.startsWith('entryUrl=')) {
+                var cUrl = line.replace('entryUrl=','')
+                newEntries.push({ "name": cName, "url": cUrl });
+            }
+        });
+        var entries = document.getElementsByClassName('entry');
+        for (var i = entries.length - 1; i >= 0; i--) {
+            entries[i].remove();
+        }
+        dataEntries = newEntries;
+        localStorage.setItem('clean-page-links', JSON.stringify(dataEntries));
+        search_duck(`setimg ${imgValue}`);
+        search_duck(`setname ${nameValue}`);
+        drawDataEntries();
+        usernameValue = nameValue;
+        bgImgUrl = imgValue
     }
 }
 
