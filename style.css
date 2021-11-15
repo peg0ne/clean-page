@@ -29,25 +29,85 @@ body {
     overflow: hidden;
 }
 
-.viewport {
-    height: 90vh;
-    width: 90vw;
-    display: flex;
+@media (orientation: portrait) {
+    .viewport {
+        height: 90vh;
+        width: 90vw;
+        display: block;
+    }
+    .workspace {
+        padding-top: 4%;
+        height: 58%;
+        width: 90vw;
+    }
+    .img {
+        border-radius: 5px;
+        display: flex;
+        height: 38%;
+        width: 90vw;
+        overflow-y: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url(https://preview.redd.it/qx4nbscle7v71.jpg?width=960&crop=smart&auto=webp&s=b62f9d65c84ebacdf70c345a622ce32a1b26d44d);
+    }
+    .username {
+        margin-top: 20vh;
+        margin-bottom: auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        min-width: 30%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 50px;
+        padding-right: 50px;
+        font-size: xxx-large;
+        background-color: rgba(0, 0, 0, 1);
+        border-radius: 5px;
+    }
+    a {
+        width: 100%;
+        font-size: xx-large!important;
+    }
 }
 
-.img {
-    border-radius: 5px;
-    display: flex;
-    width: 38%;
-    overflow-y: hidden;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url(https://preview.redd.it/qx4nbscle7v71.jpg?width=960&crop=smart&auto=webp&s=b62f9d65c84ebacdf70c345a622ce32a1b26d44d);
-}
-
-.workspace {
-    padding-left: 4%;
-    width: 58%;
+@media (orientation: landscape) {
+    .viewport {
+        height: 90vh;
+        width: 90vw;
+        display: flex;
+    }
+    .workspace {
+        padding-left: 4%;
+        width: 58%;
+    }
+    .img {
+        border-radius: 5px;
+        display: flex;
+        width: 38%;
+        overflow-y: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url(https://preview.redd.it/qx4nbscle7v71.jpg?width=960&crop=smart&auto=webp&s=b62f9d65c84ebacdf70c345a622ce32a1b26d44d);
+    }
+    .username {
+        margin-top: 70vh;
+        margin-bottom: auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        min-width: 30%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 50px;
+        padding-right: 50px;
+        font-size: xxx-large;
+        background-color: rgba(0, 0, 0, 1);
+        border-radius: 5px;
+    }
+    a {
+        width: 100%;
+    }
 }
 
 .searchbar {
@@ -156,22 +216,6 @@ a:focus {
     outline: none;
     /* animation-name: a-selection-animations;
     animation-duration: 0.3s; */
-}
-
-.username {
-    margin-top: 70vh;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    min-width: 30%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
-    font-size: xxx-large;
-    background-color: rgba(0, 0, 0, 1);
-    border-radius: 5px;
 }
 
 @media (orientation: portrait) {
