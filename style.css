@@ -72,7 +72,14 @@ body {
         font-size: xx-large!important;
     }
     .links {
+        height: 100%;
         padding-bottom: 40px;
+    }
+    .linksHolder {
+        display: inline-grid;
+        width: 100%;
+        overflow-y: auto;
+        max-height: calc(100% - 190px);
     }
 }
 
@@ -116,6 +123,12 @@ body {
     a {
         width: 100%;
     }
+    .linksHolder {
+        display: inline-grid;
+        width: 100%;
+        overflow-y: auto;
+        max-height: calc(90vh - 190px);
+    }
 }
 
 .searchbar {
@@ -135,7 +148,7 @@ body {
 }
 
 .links {
-    display: inline-grid;
+    display: block;
     width: 100%;
 }
 
@@ -251,6 +264,7 @@ button {
     max-width: 30px;
     max-height: 30px;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 button:focus,
