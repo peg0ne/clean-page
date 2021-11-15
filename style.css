@@ -48,6 +48,8 @@ body {
         overflow-y: hidden;
         background-size: cover;
         background-repeat: no-repeat;
+        background-position-x: 50%;
+        background-position-y: 50%;
         background-image: url(https://preview.redd.it/qx4nbscle7v71.jpg?width=960&crop=smart&auto=webp&s=b62f9d65c84ebacdf70c345a622ce32a1b26d44d);
     }
     .username {
@@ -92,6 +94,8 @@ body {
         overflow-y: hidden;
         background-size: cover;
         background-repeat: no-repeat;
+        background-position-x: 50%;
+        background-position-y: 50%;
         background-image: url(https://preview.redd.it/qx4nbscle7v71.jpg?width=960&crop=smart&auto=webp&s=b62f9d65c84ebacdf70c345a622ce32a1b26d44d);
     }
     .username {
