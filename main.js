@@ -1,4 +1,5 @@
 var template = `<a class="link entry" href="">{text}</a>`;
+var kbwtemplate = `<p id="kbwmarker-666-69-420" style="background-color: var(--color2); color: var(--color0)">{text}</p>`;
 var dataEntries = localStorage.getItem("clean-page-links") ?
     JSON.parse(localStorage.getItem("clean-page-links")) : [];
 var bgImgUrl = localStorage.getItem("clean-page-img") ?
@@ -105,7 +106,7 @@ function WriteConfig() {
 function EntryExists(entryName, entryUrl) {
     for (var i = 0; i < dataEntries.length; i++) {
         if (dataEntries[i].name == entryName || dataEntries[i].url == entryUrl) {
-            alert('Entry already exists');
+
             entryNameInput = '';
             entryUrlInput = '';
             return true;
@@ -125,11 +126,11 @@ function AddEntry(entryName, entryUrl) {
 
 function ConfirmEntry() {
     var entryName, entryUrl = GetEntryInputValues();
-    if (IsEmpty(entryName) || IsEmpty(entryUrl)) alert('Entry name cannot be empty');
-    else if (IsValidUrl(entryUrl)) alert('Entry url has to be valid');
-    else ClearInputValues();
-    if (EntryExists(entryName, entryUrl)) return;
+    if (IsEmpty(entryName) || IsEmpty(entryUrl)) return alert('Entry name cannot be empty');
+    else if (IsValidUrl(entryUrl)) return alert('Entry url has to be valid');
+    else if (EntryExists(entryName, entryUrl)) return alert('Entry already exists');
     AddEntry(entryName, entryUrl);
+    ClearInputValues();
     ShowCreator(false);
     DrawDataEntries();
 }
@@ -197,7 +198,7 @@ function ShowCreator(toggle = true) {
 
 function CloseAll() {
     ShowCreator(false);
+    ShowConfig(false);
     removeMarkers();
     isOpen = false;
-    ShowConfig(false);
 }

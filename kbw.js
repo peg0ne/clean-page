@@ -33,16 +33,10 @@ function createMarkers() {
 function createMarker(l, letter, secondary) {
     for (var i = 0; i < l.length; i++) {
         if (!IsActive(l[i]) || !IsVisible(l[i])) return;
-        var marker = document.createElement('p');
-        marker.style.backgroundColor = "var(--color2)";
-        marker.style.color = "var(--color0)";
-        marker.innerText = i >= alphabet.length ? `${secondary}${alphabet[i-alphabet.length]}` : `${letter}${alphabet[i]}`;
-        marker.id = 'kbwmarker-666-69-420';
+        var marker = ParseToHTML(kbwtemplate.replace('{text}', i >= alphabet.length ? `${secondary}${alphabet[i-alphabet.length]}` : `${letter}${alphabet[i]}`));
         l[i].parentElement.insertBefore(marker, l[i]);
-        posY = l[i].getBoundingClientRect().top + document.documentElement.scrollTop;
-        posX = l[i].getBoundingClientRect().left + document.documentElement.scrollLeft;
-        marker.style.top = (posY - 30) + 'px';
-        marker.style.left = (posX - 40) + 'px';
+        marker.style.top = (l[i].getBoundingClientRect().top + document.documentElement.scrollTop - 30) + 'px';
+        marker.style.left = (l[i].getBoundingClientRect().left + document.documentElement.scrollLeft - 40) + 'px';
     }
 }
 
@@ -65,11 +59,11 @@ function addToCurrent(v) {
     else if (current.length <= 1) current += v;
     if (current.length > 1) {
         try {
-            owner = GetMarkerOwner();
+            var owner = GetMarkerOwner();
             removeMarkers();
             isOpen = !isOpen;
             current = '';
-            if (parent.tagName == 'INPUT') {
+            if (owner.tagName == 'INPUT') {
                 owner.focus();
             } else {
                 owner.click();
