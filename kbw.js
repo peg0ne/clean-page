@@ -74,19 +74,21 @@ function createMarkers() {
     var links = document.getElementsByTagName("a");
     var buttons = document.getElementsByTagName("button");
     var inputs = document.getElementsByTagName("input");
-    createMarker(links, 0, 'q');
-    createMarker(buttons, 0, 'w');
-    createMarker(inputs, 0, 'e');
+    createMarker(links, 0, 'q', 'a');
+    createMarker(buttons, 0, 'w', 's');
+    createMarker(inputs, 0, 'e', 'd');
 }
 
-function createMarker(l, startIndex, letter) {
+function createMarker(l, startIndex, letter, secondary) {
     for (var i = 0; i < l.length; i++) {
         if (l[i].style.display == "none" || l[i].style.visibility == "hidden")
             return;
         var marker = document.createElement(MARKERTAG);
         marker.style.backgroundColor = "var(--color2)";
         marker.style.color = "var(--color0)";
-        marker.innerText = `${letter}${alphabet[i + startIndex]}`;
+        var newtext = `${letter}${alphabet[i + startIndex]}`;
+        if (i + startIndex >= alphabet.length) newtext = `${secondary}${alphabet[(i + startIndex)-alphabet.length]}`;
+        marker.innerText = `${newtext}`;
         marker.id = MARKERID;
         l[i].parentElement.insertBefore(marker, l[i]);
         posY = l[i].getBoundingClientRect().top + document.documentElement.scrollTop;
