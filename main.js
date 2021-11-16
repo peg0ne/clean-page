@@ -34,9 +34,11 @@ function search_duck(val) {
     if (searchValue.startsWith('setname')) {
         var name = searchValue.replace("setname ", '')
         usernameText.innerText = name;
+        usernameValue = name;
         localStorage.setItem('clean-page-name', name);
     } else if (searchValue.startsWith('setimg')) {
         var imgUrl = searchValue.replace("setimg ", '');
+        bgImgUrl = imgUrl;
         userImage.style.backgroundImage = `url(${imgUrl})`;
         localStorage.setItem('clean-page-img', imgUrl);
     } else if (searchValue.startsWith("-r")) {
@@ -150,6 +152,7 @@ function addEntry() {
     for (var i = entries.length - 1; i >= 0; i--) {
         entries[i].remove();
     }
+    showCreator(false);
     drawDataEntries();
 }
 

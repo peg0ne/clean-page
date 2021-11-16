@@ -276,6 +276,7 @@ button:hover {
 }
 
 .entrycreator {
+    box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.4);
     display: inline-grid;
     grid-template-columns: 100%;
     position: absolute;
@@ -314,6 +315,7 @@ button:hover {
 }
 
 #config {
+    box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.4);
     position: absolute;
     resize: none;
     height: 90vh;
