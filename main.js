@@ -43,12 +43,11 @@ document.onkeydown = function(e) {
         inputEl.focus();
     } else if (e.key == "f" && !IsActiveInput()) {
         e.preventDefault();
-        if (isOpen) removeMarkers();
-        else createMarkers();
-        isOpen = !isOpen;
+        if (isOpen) RemoveMarkers();
+        else CreateMarkers();
     } else if (isOpen) {
         e.preventDefault();
-        addToCurrent(e.key);
+        AddToCurrent(e.key);
     }
 };
 
@@ -199,6 +198,5 @@ function ShowCreator(toggle = true) {
 function CloseAll() {
     ShowCreator(false);
     ShowConfig(false);
-    removeMarkers();
-    isOpen = false;
+    RemoveMarkers();
 }

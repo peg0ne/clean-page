@@ -10,8 +10,9 @@ function GetMarkerOwner() {
     }
 }
 
-function removeMarkers() {
-    current = "";
+function RemoveMarkers() {
+    isOpen = false;
+    current = ''
     document.getElementById('kbw').innerText = current;
     var markers = document.getElementsByTagName('p');
     for (var i = markers.length - 1; i >= 0; i--) {
@@ -21,16 +22,16 @@ function removeMarkers() {
     }
 }
 
-function createMarkers() {
+function CreateMarkers() {
     var links = document.getElementsByTagName("a");
     var buttons = document.getElementsByTagName("button");
     var inputs = document.getElementsByTagName("input");
-    createMarker(links, 'q', 'a');
-    createMarker(buttons, 'w', 's');
-    createMarker(inputs, 'e', 'd');
+    CreateMarker(links, 'q', 'a');
+    CreateMarker(buttons, 'w', 's');
+    CreateMarker(inputs, 'e', 'd');
 }
 
-function createMarker(l, letter, secondary) {
+function CreateMarker(l, letter, secondary) {
     for (var i = 0; i < l.length; i++) {
         if (!IsActive(l[i]) || !IsVisible(l[i])) return;
         var marker = ParseToHTML(kbwtemplate.replace('{text}', i >= alphabet.length ? `${secondary}${alphabet[i-alphabet.length]}` : `${letter}${alphabet[i]}`));
@@ -40,7 +41,7 @@ function createMarker(l, letter, secondary) {
     }
 }
 
-function highlightMarkers() {
+function HighlightMarkers() {
     var markers = document.getElementsByTagName('p');
     for (var i = 0; i < markers.length; i++) {
         var text = markers[i].innerText;
@@ -50,28 +51,15 @@ function highlightMarkers() {
     document.getElementById('kbw').innerText = current;
 }
 
-function addToCurrent(v) {
-    if (v && v == 'Backspace') {
-        current = current.slice(0, -1);
-        highlightMarkers();
-    }
-    if (!v || v.length > 1) return;
+function AddToCurrent(v) {
+    if (!v || v.length > 1 && v != 'Backspace') return;
+    else if (v == 'Backspace') current = current.slice(0, -1);
     else if (current.length <= 1) current += v;
     if (current.length > 1) {
-        try {
-            var owner = GetMarkerOwner();
-            removeMarkers();
-            isOpen = !isOpen;
-            current = '';
-            if (owner.tagName == 'INPUT') {
-                owner.focus();
-            } else {
-                owner.click();
-            }
-        } catch (e) {
-            console.log(e);
-            return;
-        }
+        var owner = GetMarkerOwner();
+        RemoveMarkers();
+        if (owner.tagName == 'INPUT') owner.focus();
+        else owner.click();
     }
-    highlightMarkers();
+    HighlightMarkers();
 }
