@@ -18,6 +18,8 @@ var usernameText = document.getElementById("usernameText");
 var userImage = document.getElementById("userImg");
 var configInput = document.getElementById("config");
 var isOpen = false;
+var current = "";
+var alphabet = ['a', 'b', 'c', 'd', 'e', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'];
 
 SetUserName(usernameValue);
 SetUserImg(bgImgUrl);
@@ -32,22 +34,16 @@ inputEl.onkeydown = (e) => {
 
 document.onkeydown = function(e) {
     if (e.key == 'Tab') return;
-    if (e.key == 'Escape') {
-        e.preventDefault();
-        CloseAll();
-    } else if (e.key == 'c' && !isOpen && !IsActiveInput()) {
-        e.preventDefault();
-        ShowConfig();
-    } else if (e.key == 's' && !isOpen && !IsActiveInput()) {
-        e.preventDefault();
-        inputEl.focus();
-    } else if (e.key == "f" && !IsActiveInput()) {
-        e.preventDefault();
-        if (isOpen) RemoveMarkers();
-        else CreateMarkers();
-    } else if (isOpen) {
-        e.preventDefault();
-        AddToCurrent(e.key);
+    else e.preventDefault();
+    if (e.key != 'f' && e.key != 'Escape' && e.key != 'Tab' && isOpen) AddToCurrent(e.key);
+    else if (e.key.match(/^(Escape|c|s|f)$/)) {
+        if (e.key == 'Escape') CloseAll();
+        else if (e.key == 'c' && !isOpen && !IsActiveInput()) ShowConfig();
+        else if (e.key == 's' && !isOpen && !IsActiveInput()) inputEl.focus();
+        else if (e.key == 'f' && !IsActiveInput()) {
+            if (isOpen) RemoveMarkers();
+            else CreateMarkers();
+        }
     }
 };
 
@@ -199,4 +195,72 @@ function CloseAll() {
     ShowCreator(false);
     ShowConfig(false);
     RemoveMarkers();
+}
+
+function RemoveMarkers() {
+    isOpen = false;
+    current = ''
+    document.getElementById('kbw').innerText = current;
+    var markers = document.getElementsByTagName('p');
+    for (var i = markers.length - 1; i >= 0; i--) {
+        if (markers[i].id == 'kbwmarker-666-69-420') {
+            markers[i].remove();
+        }
+    }
+}
+
+function GetMarkerOwner() {
+    var markers = document.getElementsByTagName('p');
+    for (var i = 0; i < markers.length; i++) {
+        if (markers[i].innerText == current) {
+            return markers[i].nextSibling;
+        }
+    }
+}
+
+function CreateMarkers() {
+    isOpen = true;
+    var links = document.getElementsByTagName("a");
+    var buttons = document.getElementsByTagName("button");
+    var inputs = document.getElementsByTagName("input");
+    CreateMarker(links, 'q', 'a');
+    CreateMarker(buttons, 'w', 's');
+    CreateMarker(inputs, 'e', 'd');
+}
+
+function CreateMarker(l, letter, secondary) {
+    for (var i = 0; i < l.length; i++) {
+        if (!IsActive(l[i]) || !IsVisible(l[i])) return;
+        var marker = ParseToHTML(kbwtemplate.replace('{text}', i >= alphabet.length ? `${secondary}${alphabet[i-alphabet.length]}` : `${letter}${alphabet[i]}`));
+        l[i].parentElement.insertBefore(marker, l[i]);
+        marker.style.top = (l[i].getBoundingClientRect().top + document.documentElement.scrollTop - 30) + 'px';
+        marker.style.left = (l[i].getBoundingClientRect().left + document.documentElement.scrollLeft - 40) + 'px';
+    }
+}
+
+function HighlightMarkers() {
+    var markers = document.getElementsByTagName('p');
+    for (var i = 0; i < markers.length; i++) {
+        var text = markers[i].innerText;
+        text = text.includes(current) ? text.replace(current, `<span style="color:yellow">${current}</span>`) : text.replace('<span style="color:yellow">', '').replace('</span>', '');
+        markers[i].innerHTML = text;
+    }
+    document.getElementById('kbw').innerText = current;
+}
+function AddToCurrent(v) {
+    if (!v || v.length > 1 && v != 'Backspace')
+        return;
+    else if (v == 'Backspace')
+        current = current.slice(0, -1);
+    else if (current.length <= 1)
+        current += v;
+    if (current.length > 1) {
+        var owner = GetMarkerOwner();
+        RemoveMarkers();
+        if (owner.tagName == 'INPUT')
+            owner.focus();
+        else
+            owner.click();
+    }
+    HighlightMarkers();
 }
