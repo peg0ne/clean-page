@@ -41,6 +41,7 @@ body {
         width: 90vw;
     }
     .img {
+        box-shadow: 10px 10px 100px rgba(0, 0, 0, 0.294);
         border-radius: 5px;
         display: flex;
         height: 38%;
@@ -95,6 +96,7 @@ body {
         max-height: 90vh;
     }
     .img {
+        box-shadow: 10px 10px 100px rgba(0, 0, 0, 0.4);
         border-radius: 5px;
         display: flex;
         width: 38%;
