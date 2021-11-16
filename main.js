@@ -85,6 +85,8 @@ function showCreator(isActive = true) {
     entryCreator.style.display = entryCreator.style.display == 'none' && isActive ? 'inline-grid' : 'none';
     if (entryCreator.style.display != 'none') {
         entryNameInput.focus();
+    } else {
+        inputEl.focus();
     }
 }
 
