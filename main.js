@@ -1,18 +1,10 @@
 var template = `<a class="link entry" href="">{text}</a>`;
-var dataEntries = localStorage.getItem("clean-page-links") ?
-    JSON.parse(localStorage.getItem("clean-page-links")) : [];
-var bgImgUrl = localStorage.getItem("clean-page-img") ?
-    localStorage.getItem("clean-page-img") :
-    'https://external-preview.redd.it/opakdiLcvPEPEZTlN5GtN7EiO10KMXfHNeGXAhn1WwY.jpg?auto=webp&s=fd90024d17899799c9548ef3d651530e0d826331';
-var usernameValue = localStorage.getItem("clean-page-name") ?
-    localStorage.getItem("clean-page-name") :
-    'setname <NAME>'
-
+var dataEntries = localStorage.getItem("clean-page-links") ? JSON.parse(localStorage.getItem("clean-page-links")) : [];
+var bgImgUrl = localStorage.getItem("clean-page-img") ? ocalStorage.getItem("clean-page-img") : 'undefined';
+var usernameValue = localStorage.getItem("clean-page-name") ? localStorage.getItem("clean-page-name") : 'undefined';
 var isOpen = false;
 var current = "";
-var alphabet = [
-    'a', 'b', 'c', 'd', 'e', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'
-];
+var alphabet = ['a', 'b', 'c', 'd', 'e', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'y', 'z'];
 var entryCreator = document.getElementById("entryCreator");
 var entryNameInput = document.getElementById("nameInput");
 var entryUrlInput = document.getElementById("urlInput");
@@ -26,38 +18,10 @@ SetUserName(usernameValue);
 SetUserImg(bgImgUrl);
 DrawDataEntries();
 
-inputEl.onkeydown = (e) => {
-    if (e.key == 'Enter') {
-        PreventAndDo(e, HandleSearchBarEvent, []);
-    }
-}
+inputEl.onkeydown = (e) => { if (e.key == 'Enter') PreventAndDo(e, HandleSearchBarEvent); }
 
-function compare(a, b) { return !a ? 1 : !b ? -1 : a['name'] < b['name'] ? 1 : a['name'] > b['name'] ? -1 : 0 }
-
-function PreventAndDo(e, callback, args) {
-    e.preventDefault();
-    callback.apply(this, args);
-}
-
-function IfKeyPreventAndDO(e, key, callback, args) { if (e.key == key) PreventAndDo(e, callback, args); }
-
-function Search(baseUrl, value, replacer, exchanger) { window.open(`${baseUrl}${value.replace(replacer, exchanger)}`, "_Blank"); }
-
-function IsSelectedInputSource() { return document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA'; }
-
-function IsVisible(el) { return el.style.display != "none" && el.style.visibility != "hidden"; }
-
-function IsActive(el) { return el.style.display != 'none'; }
-
-function IsAnyActive(els) { for (var i = 0; i < els.length; i++) { if (IsActive(els[i])) return true; } return false; }
-
-function SetActive(el, visibleStyle, isActive = true) { el.style.display = el.style.display == 'none' && isActive ? visibleStyle : 'none'; return IsActive(el); }
-
-function ExtractAndReset(el) {
-    var value = el.value;
-    el.value = "";
-    return value;
-}
+function Config() { return `CONFIG:\nname=${usernameValue}\nimg=${bgImgUrl}\n\nENTRIES:\n${dataEntries.map(e => `\nentryName=${e['name']}\nentryUrl=${e['url']}`).join('\n')}`}
+function CloseAllWindows() { isOpen = false; ShowCreator(false); ShowConfig(false); RemoveMarkers();}
 
 function SetUserName(value) {
     usernameText.innerText = value;
@@ -71,47 +35,24 @@ function SetUserImg(value) {
     localStorage.setItem('clean-page-img', value);
 }
 
-function ParseToHTML(htmlString) {
-    var el = document.createElement('div');
-    el.innerHTML = htmlString;
-    return el.firstChild;
-}
-
-function Config() { return `CONFIG:\nname=${usernameValue}\nimg=${bgImgUrl}\n\nENTRIES:\n${dataEntries.map(e => `\nentryName=${e['name']}\nentryUrl=${e['url']}`).join('\n')}`}
 
 function SaveConfig() {
     var split = configInput.value.split('\n');
-    let nameValue;
-    let imgValue;
-    let cName;
+    var cName;
     var newEntries = [];
     split.forEach(line => {
         if (line.startsWith('name=')) nameValue = line.replace('name=', '');
         else if (line.startsWith('img=')) imgValue = line.replace('img=', '');
         else if (line.startsWith('entryName=')) cName = line.replace('entryName=','');
-        else if (line.startsWith('entryUrl=')) {
-            var cUrl = line.replace('entryUrl=','')
-            newEntries.push({ "name": cName, "url": cUrl });
-        }
+        else if (line.startsWith('entryUrl=')) newEntries.push({ "name": cName, "url": line.replace('entryUrl=','') });
     });
     var entries = document.getElementsByClassName('entry');
-    for (var i = entries.length - 1; i >= 0; i--) {
-        entries[i].remove();
-    }
+    for (var i = entries.length - 1; i >= 0; i--) { entries[i].remove(); }
     dataEntries = newEntries;
     localStorage.setItem('clean-page-links', JSON.stringify(dataEntries));
     SetUserName(usernameValue);
     SetUserImg(bgImgUrl);
     DrawDataEntries();
-    usernameValue = nameValue;
-    bgImgUrl = imgValue
-}
-
-function CloseAllWindows() {
-    isOpen = false;
-    ShowCreator(false);
-    ShowConfig(false);
-    RemoveMarkers();
 }
 
 function HandleSearchBarEvent() {
@@ -146,10 +87,7 @@ function DrawDataEntries() {
     });
 }
 
-function ShowCreator(isActive = true) {
-    if (SetActive(entryCreator, "inline-grid", isActive)) entryNameInput.focus();
-    else inputEl.focus();
-}
+function ShowCreator(isActive = true) { if (SetActive(entryCreator, "inline-grid", isActive)) entryNameInput.focus(); else inputEl.focus(); }
 
 function ShowConfig(isActive = true) {
     var wasActive = IsActive(configInput);
