@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Clean Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <div id="entryCreator" class="entrycreator" style="display: none;">
+        <div>
+            <h3>name</h3>
+            <input id="nameInput" class="searchinput" type="text">
+        </div>
+        <div>
+            <h3>url</h3>
+            <input id="urlInput" class="searchinput" type="text">
+        </div>
+        <div>
+            <button onclick="ShowCreator(false)" class="link"><span style="color:#ff6265">X</span></button>
+            <button onclick="AddEntry()" class="link"><span style="color:#bbff62">+</span></button>
+        </div>
+    </div>
+    <div class="viewport">
+        <div id="userImg" class="img">
+            <textarea id="config" style="display: none;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" name="config" id="" cols="30" rows="10"></textarea>
+            <h1 id="usernameText" class="username">Peg0ne</h1>
+        </div>
+        <div class="workspace">
+            <div class="searchbar">
+                <h1 class="searchpointer">></h1>
+                <input id="searchinputbar" type="text" class="searchinput" placeholder="search" />
+            </div>
+            <div class="links">
+                <div id="entryHolder" class="linksHolder"></div>
+                <button class="link" onclick="ShowCreator()">+</button>
+            </div>
+        </div>
+    </div>
+    <h3 id="kbw" class="kbw"></h3>
+</body>
+<script src="main.js"></script>
+
+</html>
